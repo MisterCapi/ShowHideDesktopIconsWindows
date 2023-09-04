@@ -2,7 +2,7 @@
 #SingleInstance, Force
 SPI_GETMOUSECLICKLOCK = 0x101E
 SPI_SETMOUSECLICKLOCK = 0x101F
-SetTimer, CheckPoEWindow, 500  ; Check for "Path of Exile" window every 500ms
+SetTimer, CheckPoEWindow, 200  ; Check for "Path of Exile" window every 500ms
 ClickLockEnabled := 0 ; Initialize ClickLock status
 
 DllCall("SystemParametersInfo", "UInt", SPI_GETMOUSECLICKLOCK, "UInt", 0, "UInt", ClickLockEnabled, UInt, 0)  
