@@ -1,22 +1,18 @@
-I_Icon = C:\Program Files\Hide Icons\monitor.ico
-IfExist, %I_Icon%
-Menu, Tray, Icon, %I_Icon%
-;return
+#SingleInstance Force
 
+; Ikona w zasobniku systemowym (opcjonalne)
+I_Icon := "C:\Program Files\Hide Icons\monitor.ico"
+if FileExist(I_Icon)
+    Menu, Tray, Icon, %I_Icon%
+
+; Skrót Win + Z do przełączania ikon
+#z::
 ControlGet, HWND, Hwnd,, SysListView321, ahk_class Progman
-If HWND =
-ControlGet, HWND, Hwnd,, SysListView321, ahk_class WorkerW
-If DllCall("IsWindowVisible", UInt, HWND)
-WinHide, ahk_id %HWND%
+if (HWND = "")
+    ControlGet, HWND, Hwnd,, SysListView321, ahk_class WorkerW
 
-#Z::
-
-ControlGet, HWND, Hwnd,, SysListView321, ahk_class Progman
-If HWND =
-ControlGet, HWND, Hwnd,, SysListView321, ahk_class WorkerW
-If DllCall("IsWindowVisible", UInt, HWND)
-WinHide, ahk_id %HWND%
-Else
-WinShow, ahk_id %HWND%
-
-Return
+if (DllCall("IsWindowVisible", "UInt", HWND))
+    WinHide, ahk_id %HWND%
+else
+    WinShow, ahk_id %HWND%
+return
